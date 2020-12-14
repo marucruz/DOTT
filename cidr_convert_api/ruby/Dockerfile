@@ -3,8 +3,8 @@ FROM ruby:2-alpine
 WORKDIR /app
 
 COPY Gemfile .
-RUN gem install bundler \
-    && bundle install
+RUN gem install bundler && \
+    bundle install
 
 COPY . .
 CMD ["ash", "-c", "ruby api.rb"]
