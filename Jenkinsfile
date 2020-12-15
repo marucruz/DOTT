@@ -5,6 +5,7 @@ pipeline {
                 steps {
                         sh 'echo "Step One"'
                 }
+        }
         stage('Code Analysis') { 
                 steps {
                         sh 'echo "Analyzing"'
