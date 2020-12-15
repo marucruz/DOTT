@@ -3,12 +3,12 @@ pipeline {
         stages {
         stage('Build Ruby Container') {
                 steps {
-                        sh 'echo "done"'
+                        sh 'docker version'
                 }
         }
         stage('Build Ruby Container') {
                 steps {
-                        sh 'echo "Step One"
+                        sh 'echo "Step One"'
                 }
         }
         stage('Code Analysis') { 
