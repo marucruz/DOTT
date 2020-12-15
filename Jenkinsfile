@@ -7,7 +7,19 @@ pipeline {
                 sh 'git --version'
             }
         }
-        
+        stage('Sonar Cloud') {
+        environment {
+            scannerHome = tool 'sonarcloudscanner'
+        }
+        steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
         stage('Build image') {
             steps {
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
