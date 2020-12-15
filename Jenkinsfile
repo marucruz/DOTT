@@ -10,7 +10,7 @@ pipeline {
         stage('Git Version') {
             steps {
                 sh 'git --version'
-                sh 'cd /'
+                sh 'cd /var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'
                 sh 'pwd'
                 sh 'ls'
             }
