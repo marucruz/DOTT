@@ -10,7 +10,7 @@ pipeline {
         stage('Git Version') {
             steps {
                 sh 'git --version'
-                sh 'cd /DOTT/cidr_convert_api/ruby'
+                sh 'cd /'
                 sh 'pwd'
                 sh 'ls'
             }
