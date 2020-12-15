@@ -1,10 +1,14 @@
 pipeline {
-        agent any
+        agent { dockerfile true }
         stages {
         stage('Build Ruby Container') {
                 steps {
-                        sh 'echo "Step One"'
-                        return docker.build("ruby", "-f https://github.com/marucruz/DOTT.git .")
+                        sh 'echo "done"'
+                }
+        }
+        stage('Build Ruby Container') {
+                steps {
+                        sh 'echo "Step One"
                 }
         }
         stage('Code Analysis') { 
