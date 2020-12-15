@@ -1,7 +1,7 @@
 pipeline {
         agent { dockerfile true }
         stages {
-        stage('Build Ruby Container') {
+        stage('Docker version') {
                 steps {
                         sh 'docker version'
                 }
