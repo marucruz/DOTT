@@ -18,7 +18,7 @@ pipeline {
         stage('Run Ruby Container') {
             steps {
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
-                    if(sudo docker ps -a | grep rb) {
+                    if(sh 'sudo docker ps -a | grep rb') {
                         sh 'sudo docker stop rb'
                         sh 'sudo docker rm rb'
                     }
