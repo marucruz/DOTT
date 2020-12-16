@@ -42,6 +42,7 @@ pipeline {
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
                 sh 'echo "Testing"'
                 sh 'ruby tests.rb'
+                sh 'set +e'
                 }
             }
         } 
