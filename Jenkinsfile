@@ -18,7 +18,11 @@ pipeline {
         stage('Run Ruby Container') {
             steps {
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
-                sh 'sudo docker run --publish 8000:8000 --detach --name rb ruby:1.0'
+                    if(sudo docker ps -a | grep rb) {
+                        sh 'sudo docker stop rb'
+                        sh 'sudo docker rm rb'
+                    }
+                    sh 'sudo docker run --publish 8000:8000 --detach --name rb ruby:1.0'
                 }
             }
         } 
@@ -40,7 +44,7 @@ pipeline {
         stage('Testing') {
             steps {
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
-                    sh 'echo "Packaging"'
+                    sh 'echo "Testing"'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh 'ruby tests.rb'
                 }
