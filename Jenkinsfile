@@ -15,7 +15,7 @@ pipeline {
                 }
             }
         }
-        ¿stage('Delete Existing Container') {
+        stage('Delete Existing Container') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh 'sudo docker stop rb'
