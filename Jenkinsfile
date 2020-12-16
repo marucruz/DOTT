@@ -17,11 +17,9 @@ pipeline {
         }
         stage('Run Ruby Container') {
             steps {
+                sh 'sudo docker stop rb'
+                sh 'sudo docker rm rb'
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
-                    if(sh 'sudo docker ps -a | grep rb') {
-                        sh 'sudo docker stop rb'
-                        sh 'sudo docker rm rb'
-                    }
                     sh 'sudo docker run --publish 8000:8000 --detach --name rb ruby:1.0'
                 }
             }
