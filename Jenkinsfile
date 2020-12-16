@@ -15,6 +15,14 @@ pipeline {
                 }
             }
         }
+        ¿stage('Delete Existing Container') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'sudo docker stop rb'
+                    sh 'sudo docker rm rb'
+                }
+            }
+        } 
         stage('Run Ruby Container') {
             steps {
                 sh 'sudo docker stop rb'
