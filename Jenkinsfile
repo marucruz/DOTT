@@ -40,11 +40,17 @@ pipeline {
         stage('Testing') {
             steps {
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
+                    sh 'echo "Packaging"'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh 'ruby tests.rb'
                 }
                 }
             }
-        } 
+        }
+        stage('Packaging') {
+            steps {
+                sh 'echo "Packaging"'
+            }
+        }
     }
 }
