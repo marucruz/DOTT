@@ -40,9 +40,9 @@ pipeline {
         stage('Testing') {
             steps {
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
-                sh 'echo "Testing"'
-                sh 'ruby tests.rb'
-                sh 'trap 'exit' ERR'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'ruby tests.rb'
+                }
                 }
             }
         } 
