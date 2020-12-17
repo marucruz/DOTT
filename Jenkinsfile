@@ -11,7 +11,7 @@ pipeline {
         stage('Build Ruby Image') {
             steps {
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
-                sh 'sudo docker build --tag ruby:1.0 .'
+                sh 'docker build --tag ruby:1.0 .'
                 }
             }
         }
@@ -28,15 +28,15 @@ pipeline {
         stage('Delete Existing Container') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh 'sudo docker stop rb'
-                    sh 'sudo docker rm rb'
+                    sh 'docker stop rb'
+                    sh 'docker rm rb'
                 }
             }
         } 
         stage('Run Ruby Container') {
             steps {
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
-                    sh 'sudo docker run --publish 8000:8000 --detach --name rb ruby:1.0'
+                    sh 'docker run --publish 8000:8000 --detach --name rb ruby:1.0'
                 }
             }
         } 
