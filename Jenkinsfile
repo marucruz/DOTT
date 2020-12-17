@@ -25,13 +25,6 @@ pipeline {
         stage('Build Ruby Image') {
             agent {
             // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-            dockerfile {
-                filename 'Dockerfile'
-                dir 'cidr_convert_api/ruby'
-                label 'my-defined-label'
-                additionalBuildArgs  '--build-arg version=1.0.2'
-                args '-v /tmp:/tmp'
-             }
             }
             steps {
                 dir('/cidr_convert_api/ruby'){
