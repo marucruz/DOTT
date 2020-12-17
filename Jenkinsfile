@@ -29,19 +29,19 @@ pipeline {
         }
         stage('Testing') {
             steps {
-                dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
+                //dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
                     sh 'echo "Testing"'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh 'ruby tests.rb'
                 }
-                }
+                //}
             }
         }
         stage('Build Ruby Image') {
             steps {
-                dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
+                //dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
                 sh 'docker build --tag ruby:1.0 .'
-                }
+                //}
             }
         }
         stage('Delete Existing Container') {
@@ -54,9 +54,9 @@ pipeline {
         } 
         stage('Run Ruby Container') {
             steps {
-                dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
+                //dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
                     sh 'docker run --publish 8000:8000 --detach --name rb ruby:1.0'
-                }
+                //}
             }
         } 
     }
