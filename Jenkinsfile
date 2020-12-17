@@ -1,6 +1,9 @@
 pipeline {
     agent any
     stages {
+        script {
+            env.WORKSPACE = $WORKSPACE/cidr_convert_api/ruby
+        }
         stage('Versions') {
             steps {
                 sh 'docker --version'
@@ -9,9 +12,9 @@ pipeline {
                 sh 'echo $WORKSPACE'
             }
         }
-                stage('Testing') {
+        stage('Testing') {
             steps {
-                dir('/cidr_convert_api/ruby'){
+                dir('$WORKSPACE/cidr_convert_api/ruby'){
                     sh 'echo "Testing"'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh 'ruby tests.rb'
@@ -20,6 +23,16 @@ pipeline {
             }
         }
         stage('Build Ruby Image') {
+            agent {
+            // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
+            dockerfile {
+                filename 'Dockerfile'
+                dir 'cidr_convert_api/ruby'
+                label 'my-defined-label'
+                additionalBuildArgs  '--build-arg version=1.0.2'
+                args '-v /tmp:/tmp'
+             }
+            }
             steps {
                 dir('/cidr_convert_api/ruby'){
                 sh 'docker build --tag ruby:1.0 .'
