@@ -3,13 +3,15 @@ pipeline {
     stages {
         stage('Versions') {
             steps {
-            script {
-                env.WORKSPACE = $WORKSPACE/cidr_convert_api/ruby
-            }
-                sh 'docker --version'
-                sh 'git --version'
-                sh 'ruby --version'
-                sh 'echo $WORKSPACE'
+            //script {
+           //     env.WORKSPACE = env.WORKSPACE/cidr_convert_api/ruby
+          //  }
+                script {
+                 docker --version
+                 git --version
+                 ruby --version
+                 echo $WORKSPACE
+                }
             }
         }
         stage('Testing') {
