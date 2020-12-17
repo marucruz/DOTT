@@ -2,10 +2,10 @@ pipeline {
     agent any
     stages {
         stage('Versions') {
-        script {
-            env.WORKSPACE = $WORKSPACE/cidr_convert_api/ruby
-        }
             steps {
+            script {
+                env.WORKSPACE = $WORKSPACE/cidr_convert_api/ruby
+            }
                 sh 'docker --version'
                 sh 'git --version'
                 sh 'ruby --version'
