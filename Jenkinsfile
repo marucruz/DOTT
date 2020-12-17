@@ -12,6 +12,21 @@ pipeline {
                  sh 'echo $WORKSPACE'
             }
         }
+        stage('Static Code Analysis') {
+        environment {
+            SCANNER_HOME = tool 'sonarcloudscanner'
+            ORGANIZATION = "marucruz"
+            PROJECT_NAME = "marucruz_DOTT"
+         }
+        steps {
+         withSonarQubeEnv('sonarcloud') {
+            sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
+            -Dsonar.java.binaries=build/classes/java/ \
+            -Dsonar.projectKey=$PROJECT_NAME \
+            -Dsonar.sources=.'''
+             }
+        }
+        }
         stage('Testing') {
             steps {
                 dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
@@ -44,20 +59,5 @@ pipeline {
                 }
             }
         } 
-        stage('Static Code Analysis') {
-        environment {
-            SCANNER_HOME = tool 'sonarcloudscanner'
-            ORGANIZATION = "marucruz"
-            PROJECT_NAME = "marucruz_DOTT"
-         }
-        steps {
-         withSonarQubeEnv('sonarcloud') {
-            sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
-            -Dsonar.java.binaries=build/classes/java/ \
-            -Dsonar.projectKey=$PROJECT_NAME \
-            -Dsonar.sources=.'''
-             }
-        }
-        }
     }
 }
