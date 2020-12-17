@@ -6,12 +6,10 @@ pipeline {
             //script {
            //     env.WORKSPACE = env.WORKSPACE/cidr_convert_api/ruby
           //  }
-                script {
-                 docker --version
-                 git --version
-                 ruby --version
-                 echo $WORKSPACE
-                }
+                 sh 'docker --version'
+                 sh 'git --version'
+                 sh 'ruby --version'
+                 sh 'echo $WORKSPACE'
             }
         }
         stage('Testing') {
