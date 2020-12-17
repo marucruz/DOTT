@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Versions') {
             steps {
-                sh 'docker --version'
+                echo $(docker --version)
                 sh 'git --version'
                 sh 'ruby --version'
                 sh 'echo $WORKSPACE'
@@ -22,7 +22,7 @@ pipeline {
         stage('Build Ruby Image') {
             steps {
                 dir('/cidr_convert_api/ruby'){
-                docker build --tag ruby:1.0 .
+                sh 'docker build --tag ruby:1.0 .'
                 }
             }
         }
