@@ -23,9 +23,6 @@ pipeline {
             }
         }
         stage('Build Ruby Image') {
-            agent {
-            // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-            }
             steps {
                 dir('/cidr_convert_api/ruby'){
                 sh 'docker build --tag ruby:1.0 .'
