@@ -1,12 +1,13 @@
 pipeline {
     agent any
     stages {
+        def WORKSPACE=$WORKSPACE/cidr_convert_api/ruby
         stage('Versions') {
             steps {
                 sh 'docker --version'
                 sh 'git --version'
                 sh 'ruby --version'
-                sh 'echo $WORKSPACE/cidr_convert_api/ruby'
+                sh 'echo $WORKSPACE'
             }
         }
         stage('Build Ruby Image') {
