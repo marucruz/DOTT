@@ -15,6 +15,16 @@ pipeline {
                 }
             }
         }
+        stage('Testing') {
+            steps {
+                dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
+                    sh 'echo "Testing"'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'ruby tests.rb'
+                }
+                }
+            }
+        }
         stage('Delete Existing Container') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -44,21 +54,6 @@ pipeline {
             -Dsonar.sources=.'''
              }
         }
-        }
-        stage('Testing') {
-            steps {
-                dir('/var/lib/jenkins/workspace/devops_project_master/cidr_convert_api/ruby'){
-                    sh 'echo "Testing"'
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh 'ruby tests.rb'
-                }
-                }
-            }
-        }
-        stage('Packaging') {
-            steps {
-                sh 'echo "Packaging"'
-            }
         }
     }
 }
