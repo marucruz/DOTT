@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Versions') {
             steps {
-                echo $(docker --version)
+                sh 'docker --version'
                 sh 'git --version'
                 sh 'ruby --version'
                 sh 'echo $WORKSPACE'
