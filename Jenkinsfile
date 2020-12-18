@@ -16,8 +16,6 @@ pipeline {
         stage('Static Code Analysis') {
         environment {
             SCANNER_HOME = tool 'sonarcloudscanner'
-            //ORGANIZATION = "marucruz"
-            //PROJECT_NAME = "marucruz_DOTT"
             ORGANIZATION = credentials('org')
             PROJECT_NAME = credentials('projectN')
          }
